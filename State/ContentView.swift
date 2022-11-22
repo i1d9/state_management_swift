@@ -8,13 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    
+    @State  var counter : Int = 0
+    
+    @State private var isPresented = false
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
+            
+           ProfileView()
+           Counter(counter: $counter)
+            
+            Button(action: {
+                
+                isPresented.toggle()
+            }){
+                Text("Edit Profile")
+            }
+        }.fullScreenCover(isPresented: $isPresented, content: EditProfileView.init).environmentObject(User())
         .padding()
     }
 }
